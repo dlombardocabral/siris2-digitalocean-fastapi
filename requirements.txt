@@ -1,3 +1,11 @@
 fastapi
 uvicorn
 gunicorn
+rioxarray
+xarray
+geopandas
+numpy
+fiona
+geemap
+ee
+matplotlib
