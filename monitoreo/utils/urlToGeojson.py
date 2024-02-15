@@ -8,7 +8,7 @@ def urlToGeojson(idLote):
 
     response = requests.get(f"http://www.sistemasiris.org/api/getgeojson/{lote}", verify=False)
 
-
+    
 
     geojson = gpd.GeoDataFrame.from_features(response.json()["features"])
 
