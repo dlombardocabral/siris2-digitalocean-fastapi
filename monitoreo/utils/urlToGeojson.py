@@ -6,8 +6,12 @@ def urlToGeojson(idLote):
     lote = idLote
     pSalida = "db/lotes/"
 
-    response = requests.get(f"https://www.sistemasiris.org/api/getgeojson/{lote}", verify=False)
+    response = requests.get(f"http://www.sistemasiris.org/api/getgeojson/{lote}", verify=False)
+
+
 
     geojson = gpd.GeoDataFrame.from_features(response.json()["features"])
+
+
 
     geojson.to_file(f"{pSalida}{lote}.geojson", driver="GeoJSON")

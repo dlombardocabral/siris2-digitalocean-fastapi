@@ -15,6 +15,7 @@ async def read_root():
 
 ## Ejecuta todas las funciones del run y genera las imagenes y el JSON con estadisticas
 @app.get('/monitoreo/{fecha}/{idLote}')
+
 def read_item(fecha:str, idLote:int):
     try:
         #descargo del endopoint el geojson de la parcela de siris
