@@ -49,3 +49,23 @@ def historico(fechaInicial:str, fechaFinal:str, idLote:int):
     # Ejecuta los procesos
     subprocess.run(["python", "run.py", fechaInicial, fechaFinal, pathToLote])
     return jsonable_encoder({'status': "Imagenes generadas correctamente"})
+
+## Para listar el contenido generado monitoreo
+@app.get('/listFiles/{product}/{idLote}')
+def get_asset(product,idLote):
+    assets_path = product + '/assets/' + idLote
+    data = {}
+    def get_files(path):
+        return [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+    if os.path.exists(assets_path):
+        for date_range in os.listdir(assets_path):
+            date_range_path = os.path.join(assets_path, date_range)
+            if os.path.isdir(date_range_path):
+                data[date_range] = {}
+                for lot in os.listdir(date_range_path):
+                    lot_path = os.path.join(date_range_path, lot)
+                    if os.path.isdir(lot_path):
+                        data[date_range][lot] = get_files(lot_path)                
+    
+    return jsonable_encoder(data)
+
