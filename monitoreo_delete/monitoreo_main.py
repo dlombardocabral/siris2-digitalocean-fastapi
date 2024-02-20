@@ -1,5 +1,30 @@
 from sys import argv
-from utils import getNdviS2, getNdviSegment, exportNdviPng, exportNdviPngClipped, exportJsonStatics, exportProductividadPng
+from monitoreo import getNdviS2, getNdviSegment, exportNdviPng, exportNdviPngClipped, exportJsonStatics, exportProductividadPng
+
+
+def getNdvi(jsonPath,fecha,resoursePath):
+     
+     return getNdviS2(jsonPath, fecha, resoursePath)
+
+def getNdviSegment():
+
+     return getNdviSegment(jsonPath, fecha, resoursePath)
+
+def exportNdviPng():
+     
+     return getNdviS2(jsonPath, fecha, resoursePath)
+
+def exportNdviPngClipped():
+     
+     return getNdviS2(jsonPath, fecha, resoursePath)
+
+def exportJsonStatics():
+     
+     return getNdviS2(jsonPath, fecha, resoursePath)
+
+def exportProductividadPng():
+     
+     return getNdviS2(jsonPath, fecha, resoursePath)
 
 argv = argv[1::]
 funcionalidades = ["--getNdvi", "--exportNdviPng", "--exportNdviPngClipped", "--exportJsonStatics", "--exportProductividadPng"]
@@ -7,7 +32,7 @@ funcionalidades = ["--getNdvi", "--exportNdviPng", "--exportNdviPngClipped", "--
 ## ejecucion de funciones
 ## 1 se bajan los datos del GEE 
 if argv[0] == "--getNdvi":
-    getNdviS2(argv[1], argv[2], argv[3])
+   
 #=======================================
 ## 2 se segmentan las imagenes
 if argv[0] == "--getNdviSegment":

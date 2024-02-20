@@ -1,9 +1,9 @@
-def clipTif(pTif, pLote):
+import rioxarray as rio
+import xarray as xr
+import geopandas as gpd
+import numpy as np
 
-    import rioxarray as rio
-    import xarray as xr
-    import geopandas as gpd
-    import numpy as np
+def clipTif(pTif, pLote):
 
     tifClipped = xr.where(rio.open_rasterio(pTif).rio.clip(gpd.read_file(pLote).geometry, drop=True)==0, np.nan, rio.open_rasterio(pTif).rio.clip(gpd.read_file(pLote).geometry, drop=True))
 

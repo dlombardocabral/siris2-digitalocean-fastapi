@@ -3,7 +3,8 @@ from starlette.responses import FileResponse
 from fastapi.encoders import jsonable_encoder
 import os
 import subprocess
-from librerias import urlToGeojson
+from librerias.urlToGeojson import urlToGeojson
+from monitoreo import monitoreoProcess 
 
 
 app = FastAPI()
@@ -15,21 +16,26 @@ async def read_root():
 
 ## Ejecuta todas las funciones del run y genera las imagenes y el JSON con estadisticas
 @app.get('/monitoreo/{fecha}/{idLote}')
-def monitoreo(fecha:str, idLote:int):
+
+def monitoreo(fecha:str, idLote:str):
+    jsonFile= idLote + '.geojson'
+    jsonPath = 'librerias/lotes/' + jsonFile
+    assetPath= 'assets/'+ idLote
+    productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "estadisticas", "productividad-png"]
     try:
         #descargo del endopoint el geojson de la parcela de siris
-        jsonlote=urlToGeojson(idLote)
+
+        jsonlote=urlToGeojson(idLote,jsonPath)
+
     except:
-        return jsonable_encoder({f'Error': 'No se pudo procesar correctamente el geoJSON de la parcela {jsonlote}'})
-    pathToLote = "db/lotes/" + idLote + ".geojson"
-    # Verifica si las carpetas existen, si no existen, las crea
-    productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "estadisticas", "productividad-png"]
+        return jsonable_encoder({f'Error': 'No se pudo procesar correctamente el geoJSON de la parcela '})
     for prod in productos:
-        if not os.path.exists(f"assets/{idLote}/{prod}"):
-            os.makedirs(f"assets/{idLote}/{prod}")
+        if not os.path.exists(f"{assetPath}/{prod}"):
+            os.makedirs(f"{assetPath}/{prod}")
 
     # Ejecuta los procesos
-    subprocess.run(["python", "run.py", fecha, pathToLote])
+    subprocess.run(["python", "monitoreo.py", fecha, jsonPath])
+    monitoreoProcess(fecha, jsonPath, idLote )
     return jsonable_encoder({'status': 'Imagenes generadas correctamente'})
 
 
