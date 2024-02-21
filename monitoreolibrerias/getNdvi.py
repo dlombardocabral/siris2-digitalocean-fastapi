@@ -2,8 +2,8 @@ import ee
 import geemap
 import pandas as pd
 from datetime import datetime, timedelta
-#ee.Authenticate(auth_mode=locals)
-ee.Initialize()
+ee.Authenticate()
+ee.Initialize(project='ee-glaciares-conae')
 
 def getNdviS2(lote, fecha, pSalida):
 

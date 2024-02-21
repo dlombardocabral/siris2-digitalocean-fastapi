@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ee-glaciares-conae",
+  "private_key_id": "cb0917cc45d81717f854c71e843c071184e674bf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCl0DV6Dm5yGNc6\nTNtjxDq+5RY5ec6hfgZO3ip/BmyZ/AkS1rkcf/+ApaspZ8s3LCAE4QmY3qwVGhSE\nvYRSm8zPtrIujMBCaSl8IGcsiA91GuTDbwtC4R9qSFY155/s+mItRDn96EQXp1S4\nQSVmp0bAvn8e4m9bKzm3vgt1XVx39o8bUkWgUa/xcS7R5oQhquPHfLc7PYUxdtUD\ny5Nh024gRFYgRYCxi5syHP8zcF23oQyjFAQ54aeSZEDRnS6gh5Gfq/xH9NGe2W2T\nRoem1Ywl30Jw1VZqq/J3AXdX2iWHZSqjNmv+EMie3s9ppDabqNkxQQsA8AOCgHmD\nYZD/EVXHAgMBAAECggEAF0BZH2KCrlE5bR117kmIC1jIgwrHpPGtJMYWo3VdKUKk\naxXdI1f3liylEctSPcxcORLta5hd/R+JHQwOUB802zO9TLXECAwDGzrX/PCfakZ5\nKcaah6hV5Wt7W1e9n1eFCN/2WdqGIeL/CE9qVTjDvSd5X/VUtC4di9yEctLCsreQ\nfkIrYsiggZ1S8rHKIICTpKSSVKkPuYyjB8BDIIuy/ccBdwE1V2g5ARQ+qAi/7fZ+\nOlUjEjUO/UBsottXVp6MUS7NLH/KhxXdmpsHQFtXkOIBTHAMj58UaSHJlvhjiu0N\nUubsAGIIkPxxjUxuyiIpM11ZmTAOaNpBls6zEJ1n0QKBgQDZ5Y01eg91MQ3FCqE1\nkIRoF9nPaPLkZEWMBvgk29aZRepCwMI64T+c6VRyCbvoM7mMVSSYa99BwltUsOsg\n9YlAiq50H75idrFuAIfzamCIfaLqm/pNr/gA0iGdYk7nb4m+ISC+xijGJJQLFzOy\nsvLq5kJON/YoGCqgPD3EOpPXnQKBgQDCzxKgB2S8RuIzH6qR3B68Kt3vFeNTdIsi\nM2Nst9PW/A7idP/H8QMqURsDfS3brCw+0ahna/OLdz6+dprtWwx/VMASHwyCdvqS\nwM0fwgooz7E5LVh4qlVXwnPN53L+Q/cM6Ag5hbxqdwhXojh3Pxg6BQ9sp7mhq/JH\nHR/ZCx7vswKBgFeQoXPJLqcY5IC36dsdzagLVbO9aEcSaMSCFHyzgAUujJrw3d1N\nogPL3OzLLqF9D+buXHuIdjr2AUACrSscoWC3mq3+B8OIEXu0aO4QZOTVIICJ2Ega\nHF8wEuQtmqn1L/ShWYhxF/ewwXHHjDYXJfnyONk4Mgsg0xh7vRK7u6gdAoGATyqp\nrgDzLhQ8Tnxa6+WhU+SzxjqF5F9jP2XUzNSzsRVD00GqxI0sNSE6siNH5JLGdEzt\nfAIBujaed/ZpJXYv0PsXBwY5JjfFwqe5dGN9j3I/2jWUU40dG4n5V77sG2pxVnxh\nA0dW94kiCcLx4Xvxk3qE9yn+JTZkQgQS8jgzvUMCgYEAyxqnABaoV1r3EFmPr8Nn\n/U+WXIMqeOuhUR/9N5sUQl6AAXMo9mMpu3l+L7yuZ0d1XZ1pW+yv+b9Yez98LFxE\nnJoZAO6nEs2ZnAuqM/n0DPiVLmXTd9ba8lOBfJ1bkRnO7NYjR1XmffNnFAWGQEJ1\n8XKOF9cxFUUV3KeVk1ZZ/FE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "glaciares-conae@ee-glaciares-conae.iam.gserviceaccount.com",
+  "client_id": "110112464732048187571",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/glaciares-conae%40ee-glaciares-conae.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
