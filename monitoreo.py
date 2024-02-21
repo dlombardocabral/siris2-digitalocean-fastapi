@@ -2,20 +2,22 @@ import subprocess
 import os
 from monitoreolibrerias import getNdviS2, getNdviSegment, exportNdviPng, exportNdviPngClipped, exportJsonStatics, exportProductividadPng, clipTif
 #from monitoreo_main import *
+from pathlib import Path
 
 
 def monitoreoProcess (fecha:str, jsonPath:str, idLote:str) : 
    
-    ndviTif= f"assets/{idLote}/ndvi-tif/"
-    productividadTif= f"assets/{idLote}/productividad-tif/"
-    ndviPng=f"assets/{idLote}/ndvi-png/"
-    ndviPngRecortado=f"assets/{idLote}/ndvi-png-recortado/"
-    estadisticas=f"assets/{idLote}/estadisticas/"
-    productividadPng=f"assets/{idLote}/productividad-png/"
-
+    ndviTif= f"assets/monitoreo/{idLote}/ndvi-tif/"
+    productividadTif= f"assets/monitoreo/{idLote}/productividad-tif/"
+    ndviPng=f"assets/monitoreo/{idLote}/ndvi-png/"
+    ndviPngRecortado=f"assets/monitoreo/{idLote}/ndvi-png-recortado/"
+    estadisticas=f"assets/monitoreo/{idLote}/estadisticas/"
+    productividadPng=f"assets/monitoreo/{idLote}/productividad-png/"
+    print(ndviTif)
     ## 1 se bajan los datos del GEE 
     #subprocess.check_output(["python", "main.py", "--getNdvi", jsonPath, fecha, f"assets/{idLote}/ndvi-tif/"])
     getNdviS2(jsonPath,fecha,ndviTif)
+
 
     ## 2 se segmentan las imagenes
     bajados = os.listdir(ndviTif)

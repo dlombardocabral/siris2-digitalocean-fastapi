@@ -2,10 +2,11 @@ import ee
 import geemap
 import pandas as pd
 from datetime import datetime, timedelta
-
+#ee.Authenticate(auth_mode=locals)
+ee.Initialize()
 
 def getNdviS2(lote, fecha, pSalida):
-    ee.Initialize()
+
     ## Parametros inciales
     nombreLote = lote.split("/")[-1::][0].split(".")[0]
     endDate = pd.to_datetime(fecha).strftime("%Y-%m-%d")
@@ -35,13 +36,15 @@ def getNdviS2(lote, fecha, pSalida):
 
     ## Para cada imagen de la ImageCollection, guardo en local
     listaImagenes = ndvi.select("NDVI").toList(ndvi.size())
-    
+    #print(listaImagenes.getInfo())
     for i in range(len(listaImagenes.getInfo())):
         
-        imagen = ee.Image(listaImagenes.get(i))
 
+        imagen = ee.Image(listaImagenes.get(i))
+  
         fechaObjeto = imagen.getInfo()['properties']['GRANULE_ID'].split("_")[3]
         fechaParseada = str(datetime.strptime(fechaObjeto, "%Y%m%dT%H%M%S").strftime("%Y-%m-%dT%H:%M:%S"))
-        
+
         #===================================================
-        geemap.ee_export_image(imagen, filename=f"{pSalida}{fechaParseada}.tif", scale=10, region=roi.geometry(), crs="EPSG:4326")
+        #pSalida='siris2-digitalocean-fastapi/assets/monitoreo/1/ndvi-tif'
+        geemap.ee_export_image(imagen, filename=f"{pSalida}{fechaParseada}.tif", scale=10, region=roi.geometry(), crs="EPSG:4326", unzip=True, timeout=3000)
