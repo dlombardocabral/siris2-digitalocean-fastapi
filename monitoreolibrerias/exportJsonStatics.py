@@ -1,11 +1,10 @@
-def exportJsonStatics(pTif, pLote, pSalida):
+import geopandas as gpd; import fiona; import numpy as np
+fiona.drvsupport.supported_drivers['libkml'] = 'rw' 
+fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' 
+import rioxarray as rio; import xarray as xr
+import json
 
-    import geopandas as gpd; import fiona; import numpy as np
-    fiona.drvsupport.supported_drivers['libkml'] = 'rw' 
-    fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' 
-    import rioxarray as rio; import xarray as xr
-    import json
-    
+def exportJsonStatics(pTif, pLote, pSalida):
     # Para exportar
     fname = pTif.split("/")[::-1][0].split(".")[0]
     idLote = pLote.split("/")[-1].split(".")[0]

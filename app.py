@@ -20,7 +20,7 @@ async def read_root():
 def monitoreo(fecha:str, idLote:str):
     jsonFile= idLote + '.geojson'
     jsonPath = 'librerias/lotes/' + jsonFile
-    assetPath= 'assets/'+ idLote
+    assetPath= 'assets/monitoreo/'+ idLote
     productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "estadisticas", "productividad-png"]
     try:
         #descargo del endopoint el geojson de la parcela de siris
@@ -33,8 +33,7 @@ def monitoreo(fecha:str, idLote:str):
         if not os.path.exists(f"{assetPath}/{prod}"):
             os.makedirs(f"{assetPath}/{prod}")
 
-    # Ejecuta los procesos
-    subprocess.run(["python", "monitoreo.py", fecha, jsonPath])
+    #subprocess.run(["python", "monitoreo.py", fecha, jsonPath])
     monitoreoProcess(fecha, jsonPath, idLote )
     return jsonable_encoder({'status': 'Imagenes generadas correctamente'})
 
@@ -59,19 +58,26 @@ def historico(fechaInicial:str, fechaFinal:str, idLote:int):
 ## Para listar el contenido generado monitoreo
 @app.get('/listFiles/{product}/{idLote}')
 def get_asset(product,idLote):
-    assets_path = product + '/assets/' + idLote
+    assets_path = 'assets/' + product + '/' + idLote
+
+
     data = {}
     def get_files(path):
-        return [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+
+        jsondata=[f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+  
+        return jsondata
+   
     if os.path.exists(assets_path):
         for date_range in os.listdir(assets_path):
             date_range_path = os.path.join(assets_path, date_range)
+
             if os.path.isdir(date_range_path):
                 data[date_range] = {}
                 for lot in os.listdir(date_range_path):
+                    date=lot.split('T',-1)
+
                     lot_path = os.path.join(date_range_path, lot)
-                    if os.path.isdir(lot_path):
-                        data[date_range][lot] = get_files(lot_path)                
-    
+                    data[date_range][date[0]] = lot_path
     return jsonable_encoder(data)
 

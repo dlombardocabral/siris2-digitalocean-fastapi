@@ -1,11 +1,11 @@
+import ee
+import geemap
+import pandas as pd
+from datetime import datetime, timedelta
+
+
 def getNdviS2(lote, fecha, pSalida):
-    
-    import ee
-    import geemap
-    import pandas as pd
-    from datetime import datetime, timedelta
     ee.Initialize()
-    
     ## Parametros inciales
     nombreLote = lote.split("/")[-1::][0].split(".")[0]
     endDate = pd.to_datetime(fecha).strftime("%Y-%m-%d")
