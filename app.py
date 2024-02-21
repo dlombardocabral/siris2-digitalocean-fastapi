@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from starlette.responses import FileResponse
 from fastapi.encoders import jsonable_encoder
+from fastapi.staticfiles import StaticFiles
 import os
 import subprocess
 from librerias.urlToGeojson import urlToGeojson
@@ -13,6 +14,8 @@ app = FastAPI()
 @app.get("/")
 async def read_root():
     return FileResponse('template/index.html')
+
+app.mount("/assets", StaticFiles(directory="assets"), name="assets") 
 
 ## Ejecuta todas las funciones del run y genera las imagenes y el JSON con estadisticas
 @app.get('/monitoreo/{fecha}/{idLote}')
