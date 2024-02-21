@@ -2,8 +2,11 @@ import ee
 import geemap
 import pandas as pd
 from datetime import datetime, timedelta
-ee.Authenticate()
-ee.Initialize(project='ee-glaciares-conae')
+path_env='./'
+service_account = 'glaciares-conae@ee-glaciares-conae.iam.gserviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, path_env+'ee-glaciares-conae-cb0917cc45d8.json')
+
+ee.Initialize(credentials)
 
 def getNdviS2(lote, fecha, pSalida):
 
