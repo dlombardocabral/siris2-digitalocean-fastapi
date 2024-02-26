@@ -1,15 +1,19 @@
+import ee
+import geemap
+path_env='./'
+service_account = 'glaciares-conae@ee-glaciares-conae.iam.gserviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, path_env+'ee-glaciares-conae-cb0917cc45d8.json')
+
+ee.Initialize(credentials)
+
 def getNdviL8(lote, fini, ffin, pSalida):
-    
-    import ee
-    import geemap
-    ee.Initialize()
-    
+   
     yini = fini.split("-")[0]; yfin = ffin.split("-")[0]
     idLote = lote.split("/")[-1].split(".")[0]
     
     # Carga el lote a geemap de acuerdo a su extension
     extLote = lote.split("/")[::-1][0].split(".")[::-1][0]
-    if extLote == "geojson":
+    if extLote == "geojson":     
         roi = geemap.geojson_to_ee(lote)
     elif extLote == "kml":
         roi = geemap.kml_to_ee(lote)
@@ -81,14 +85,10 @@ def getNdviL8(lote, fini, ffin, pSalida):
 
     #===================================================
     geemap.ee_export_image(ndviMaxCampania, filename=f"{pSalida}{fini.replace("-", "")}-{ffin.replace("-", "")}.tif", scale=30, region=roi.geometry())
-    
+
     return(f"{pSalida}{fini.replace("-", "")}-{ffin.replace("-", "")}.tif")
 
 def getNdviL5(lote, fini, ffin, pSalida):
-    
-    import ee
-    import geemap
-    ee.Initialize()
     
     yini = fini.split("-")[0]; yfin = ffin.split("-")[0]
     idLote = lote.split("/")[-1].split(".")[0]

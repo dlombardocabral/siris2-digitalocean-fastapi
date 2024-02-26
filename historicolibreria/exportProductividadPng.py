@@ -1,13 +1,13 @@
+import geopandas as gpd; import fiona; import numpy as np
+fiona.drvsupport.supported_drivers['libkml'] = 'rw' 
+fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' 
+import rioxarray as rio; import xarray as xr
+import matplotlib.pyplot as plt
+
+## 
+import matplotlib as mpl
+
 def exportProductividadPng(pSegment, pLote, pSalida):
-
-    import geopandas as gpd; import fiona; import numpy as np
-    fiona.drvsupport.supported_drivers['libkml'] = 'rw' 
-    fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' 
-    import rioxarray as rio; import xarray as xr
-    import matplotlib.pyplot as plt
-
-    ## 
-    import matplotlib as mpl
     semaforo = mpl.colors.ListedColormap(
         ["#f70505", "#f7df05", "#09941b"]
     )

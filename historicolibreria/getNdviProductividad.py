@@ -1,6 +1,8 @@
+import rioxarray as rio; import xarray as xr
+import numpy as np
+
 def getNdviProductividad(pNdviLote, umbralMin, umbralMax, pSalida):
-    import rioxarray as rio; import xarray as xr
-    import numpy as np
+
     '''
     Esta funcion realiza la segmentacion de una imagen GeoTif de acuerdo a la productividad del lote agricola. Divide en 3 segmentos distintos. Las escalas de productividad definidas son:
         10 -> Productividad baja (NDVI < umbralMin)

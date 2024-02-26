@@ -13,7 +13,7 @@ def monitoreoProcess (fecha:str, jsonPath:str, idLote:str) :
     ndviPngRecortado=f"assets/monitoreo/{idLote}/ndvi-png-recortado/"
     estadisticas=f"assets/monitoreo/{idLote}/estadisticas/"
     productividadPng=f"assets/monitoreo/{idLote}/productividad-png/"
-    print(ndviTif)
+   
     ## 1 se bajan los datos del GEE 
     #subprocess.check_output(["python", "main.py", "--getNdvi", jsonPath, fecha, f"assets/{idLote}/ndvi-tif/"])
     getNdviS2(jsonPath,fecha,ndviTif)

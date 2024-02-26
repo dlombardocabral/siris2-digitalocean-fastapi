@@ -1,11 +1,11 @@
+import matplotlib.pyplot as plt
+import rioxarray as rio
+import geopandas as gpd; import fiona
+fiona.drvsupport.supported_drivers['libkml'] = 'rw'
+fiona.drvsupport.supported_drivers['LIBKML'] = 'rw'
+
 def exportNdviPng(pNdviLote, pLote, pSalida):
-    
-    import matplotlib.pyplot as plt
-    import rioxarray as rio
-    import geopandas as gpd; import fiona
-    fiona.drvsupport.supported_drivers['libkml'] = 'rw'
-    fiona.drvsupport.supported_drivers['LIBKML'] = 'rw'
-    
+ 
     ndviLote = rio.open_rasterio(pNdviLote)
     lote = gpd.read_file(pLote)
     

@@ -6,6 +6,7 @@ import os
 import subprocess
 from librerias.urlToGeojson import urlToGeojson
 from monitoreo import monitoreoProcess 
+from historico import historicoProcess 
 
 
 app = FastAPI()
@@ -27,8 +28,7 @@ def monitoreo(fecha:str, idLote:str):
     productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "estadisticas", "productividad-png"]
     try:
         #descargo del endopoint el geojson de la parcela de siris
-
-        jsonlote=urlToGeojson(idLote,jsonPath)
+        urlToGeojson(idLote,jsonPath)
 
     except:
         return jsonable_encoder({f'Error': 'No se pudo procesar correctamente el geoJSON de la parcela '})
@@ -43,19 +43,25 @@ def monitoreo(fecha:str, idLote:str):
 
 ## Genera todas las imagenes en cascada e imprime un JSON con el status y la lista de imagenes generadas
 @app.get('/historico/{fechaInicial}/{fechaFinal}/{idLote}')
-def historico(fechaInicial:str, fechaFinal:str, idLote:int):
+
+def historico(fechaInicial:str, fechaFinal:str, idLote:str):
+    jsonFile= idLote + '.geojson'
+    jsonPath = 'librerias/lotes/' + jsonFile
+    assetPath= 'assets/historico/'+ idLote
+    productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "productividad-png"]
     try:
-        urlToGeojson(idLote)
+        urlToGeojson(idLote,jsonPath)
     except:
         return jsonable_encoder({'Error': 'No se pudo procesar correctamente el geoJSON de la parcela'})        
-    pathToLote = "db/lotes/" + idLote + ".geojson"
+  
     # Verifica si las carpetas existen, si no existen, las crea
-    productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "productividad-png"]
+    
     for prod in productos:
-            if not os.path.exists(f"assets/{idLote}/{prod}"):
-                os.makedirs(f"assets/{idLote}/{prod}")
+            if not os.path.exists(f"{assetPath}/{prod}"):
+                os.makedirs(f"{assetPath}/{prod}")
     # Ejecuta los procesos
-    subprocess.run(["python", "run.py", fechaInicial, fechaFinal, pathToLote])
+    historicoProcess(fechaInicial, fechaFinal,jsonPath)       
+    #subprocess.run(["python", "run.py", fechaInicial, fechaFinal, pathToLote])
     return jsonable_encoder({'status': "Imagenes generadas correctamente"})
 
 ## Para listar el contenido generado monitoreo

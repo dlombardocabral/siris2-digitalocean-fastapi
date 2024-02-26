@@ -1,10 +1,10 @@
-def exportNdviPngClipped(pNdviLote, pLote, pSalida):
+import geopandas as gpd; import fiona; import numpy as np
+fiona.drvsupport.supported_drivers['libkml'] = 'rw' 
+fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' 
+import rioxarray as rio; import xarray as xr
+import matplotlib.pyplot as plt
 
-    import geopandas as gpd; import fiona; import numpy as np
-    fiona.drvsupport.supported_drivers['libkml'] = 'rw' 
-    fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' 
-    import rioxarray as rio; import xarray as xr
-    import matplotlib.pyplot as plt
+def exportNdviPngClipped(pNdviLote, pLote, pSalida):
 
     tifClipped = xr.where(rio.open_rasterio(pNdviLote).rio.clip(gpd.read_file(pLote).geometry, drop=True)==0, np.nan, rio.open_rasterio(pNdviLote).rio.clip(gpd.read_file(pLote).geometry, drop=True))
     # Para el titulo
