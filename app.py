@@ -25,7 +25,7 @@ def monitoreo(fecha:str, idLote:str):
     jsonFile= idLote + '.geojson'
     jsonPath = 'librerias/lotes/' + jsonFile
     assetPath= 'assets/monitoreo/'+ idLote
-    productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "estadisticas", "productividad-png"]
+    productos = ["ndviTif", "productividadTif", "ndviPng", "ndviPngRecortado", "estadisticas", "productividadPng"]
     try:
         #descargo del endopoint el geojson de la parcela de siris
         urlToGeojson(idLote,jsonPath)
@@ -48,7 +48,7 @@ def historico(fechaInicial:str, fechaFinal:str, idLote:str):
     jsonFile= idLote + '.geojson'
     jsonPath = 'librerias/lotes/' + jsonFile
     assetPath= 'assets/historico/'+ idLote
-    productos = ["ndvi-tif", "productividad-tif", "ndvi-png", "ndvi-png-recortado", "productividad-png"]
+    productos = ["ndviTif", "productividadTif", "ndviPng", "ndviPngRecortado", "productividadPng"]
     try:
         urlToGeojson(idLote,jsonPath)
     except:
@@ -78,15 +78,18 @@ def get_asset(product,idLote):
         return jsondata
    
     if os.path.exists(assets_path):
+       
         for date_range in os.listdir(assets_path):
             date_range_path = os.path.join(assets_path, date_range)
 
             if os.path.isdir(date_range_path):
                 data[date_range] = {}
+                i=0
                 for lot in os.listdir(date_range_path):
                     date=lot.split('T',-1)
-
                     lot_path = os.path.join(date_range_path, lot)
-                    data[date_range][date[0]] = lot_path
+                    data[date_range][i]={'date':date[0], 'data':lot_path}
+                    i=i+1  
+             
     return jsonable_encoder(data)
 

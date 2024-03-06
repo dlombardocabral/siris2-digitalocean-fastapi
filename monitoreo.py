@@ -7,12 +7,12 @@ from pathlib import Path
 
 def monitoreoProcess (fecha:str, jsonPath:str, idLote:str) : 
    
-    ndviTif= f"assets/monitoreo/{idLote}/ndvi-tif/"
-    productividadTif= f"assets/monitoreo/{idLote}/productividad-tif/"
-    ndviPng=f"assets/monitoreo/{idLote}/ndvi-png/"
-    ndviPngRecortado=f"assets/monitoreo/{idLote}/ndvi-png-recortado/"
+    ndviTif= f"assets/monitoreo/{idLote}/ndviTif/"
+    productividadTif= f"assets/monitoreo/{idLote}/productividadTif/"
+    ndviPng=f"assets/monitoreo/{idLote}/ndviPng/"
+    ndviPngRecortado=f"assets/monitoreo/{idLote}/ndviPngRecortado/"
     estadisticas=f"assets/monitoreo/{idLote}/estadisticas/"
-    productividadPng=f"assets/monitoreo/{idLote}/productividad-png/"
+    productividadPng=f"assets/monitoreo/{idLote}/productividadPng/"
    
     ## 1 se bajan los datos del GEE 
     #subprocess.check_output(["python", "main.py", "--getNdvi", jsonPath, fecha, f"assets/{idLote}/ndvi-tif/"])

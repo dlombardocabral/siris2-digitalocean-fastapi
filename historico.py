@@ -9,11 +9,11 @@ def historicoProcess (fechaInicial:str, fechaFinal:str, pathToLote:str) :
     pLote = pathToLote # "path/to/lote.geojson"
     lote = pLote.split("/")[-1]
     idLote = lote.split(".")[0]
-    ndviTif= f"assets/historico/{idLote}/ndvi-tif/"
-    productividadTif= f"assets/historico/{idLote}/productividad-tif/"
-    ndviPng=f"assets/historico/{idLote}/ndvi-png/"
-    ndviPngRecortado=f"assets/historico/{idLote}/ndvi-png-recortado/"
-    productividadPng=f"assets/historico/{idLote}/productividad-png/"
+    ndviTif= f"assets/historico/{idLote}/ndviTif/"
+    productividadTif= f"assets/historico/{idLote}/productividadTif/"
+    ndviPng=f"assets/historico/{idLote}/ndviPng/"
+    ndviPngRecortado=f"assets/historico/{idLote}/ndviPngRecortado/"
+    productividadPng=f"assets/historico/{idLote}/productividadPng/"
 
     ## complementarios
 
