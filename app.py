@@ -88,7 +88,7 @@ def get_asset(product,idLote):
                 for lot in os.listdir(date_range_path):
                     date=lot.split('T',-1)
                     lot_path = os.path.join(date_range_path, lot)
-                    data[date_range][i]={'date':date[0], 'data':lot_path}
+                    data[date_range][date[0]]={'date':date[0], 'data':lot_path}
                     i=i+1  
              
     return jsonable_encoder(data)
