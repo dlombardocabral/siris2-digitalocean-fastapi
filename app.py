@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from starlette.responses import FileResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
@@ -7,6 +7,8 @@ import subprocess
 from librerias.urlToGeojson import urlToGeojson
 from monitoreo import monitoreoProcess 
 from historico import historicoProcess 
+import numpy as np
+import rasterio
 
 
 app = FastAPI()
@@ -20,7 +22,6 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 ## Ejecuta todas las funciones del run y genera las imagenes y el JSON con estadisticas
 @app.get('/monitoreo/{fecha}/{idLote}')
-
 def monitoreo(fecha:str, idLote:str):
     jsonFile= idLote + '.geojson'
     jsonPath = 'librerias/lotes/' + jsonFile
@@ -88,8 +89,30 @@ def get_asset(product,idLote):
                 for lot in os.listdir(date_range_path):
                     date=lot.split('T',-1)
                     lot_path = os.path.join(date_range_path, lot)
-                    data[date_range][date[0]]={'date':date[0], 'data':lot_path}
-                    i=i+1  
-             
+                   
+                    with rasterio.open(lot_path) as f:
+                        arr = f.read(1)
+                        mask = (arr != f.nodata)
+                        elev = arr[mask]
+                        col, row = np.where(mask)
+                        x, y = f.xy(col, row)
+                        uid = np.arange(f.height * f.width).reshape((f.height, f.width))[mask]
+
+                    result = np.rec.fromarrays([uid, x, y, elev], names=['id', 'x', 'y', 'elev'])
+                    data[date_range][date[0]]= {'date':date[0], 'data':lot_path,'meta':result}
+                    print(result)  
+                    i=i+1
+                   
+
+    
     return jsonable_encoder(data)
 
+@app.post("/files/")
+async def create_file(file: Annotated[bytes, File()]):
+    return {"file_size": len(file)}
+
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile):
+    return {"filename": file.filename}
+  
